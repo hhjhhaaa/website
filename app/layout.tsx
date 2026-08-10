@@ -7,24 +7,24 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? (isProduction ? "https://hhj
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "林序｜建筑师个人主页",
-  description: "林序，独立建筑师与空间研究者，关注居住、光、材料与日常生活之间的长期关系。",
+  title: "郭羽棋｜建筑学生作品集 2019—2026",
+  description: "应届建筑学硕士郭羽棋的学生作品集，展示建筑绘图、排版、建模、实体制作与软件运用能力。",
   icons: {
     icon: `${basePath}/favicon.svg`,
     shortcut: `${basePath}/favicon.svg`,
   },
   openGraph: {
-    title: "林序｜LIN XU · ARCHITECT",
-    description: "独立建筑师与空间研究者。Selected works 2019—2026.",
+    title: "郭羽棋｜ARCHITECTURE STUDENT PORTFOLIO",
+    description: "建筑学生作品集 2019—2026：图纸、模型、排版与设计过程。",
     type: "website",
     locale: "zh_CN",
-    images: [{ url: `${basePath}/og-personal.webp`, width: 1200, height: 630, alt: "LIN XU · ARCHITECT" }],
+    images: [{ url: `${basePath}/og-guo-yuqi.webp`, width: 1200, height: 630, alt: "GUO YUQI ARCHITECTURE STUDENT PORTFOLIO" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "林序｜LIN XU · ARCHITECT",
-    description: "独立建筑师与空间研究者。",
-    images: [`${basePath}/og-personal.webp`],
+    title: "郭羽棋｜建筑学生作品集",
+    description: "图纸、模型、排版与设计过程。",
+    images: [`${basePath}/og-guo-yuqi.webp`],
   },
 };
 

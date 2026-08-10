@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { DrawingPlate } from "../../components/DrawingPlate";
 import { getProject, projects } from "../data";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (process.env.NODE_ENV === "production" ? "/website" : "");
@@ -13,12 +14,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = getProject(slug);
   if (!project) return {};
   return {
-    title: `${project.title}｜林序建筑作品`,
+    title: `${project.year} · ${project.title}｜郭羽棋建筑学生作品集`,
     description: project.summary,
     openGraph: {
       title: `${project.title} · ${project.titleEn}`,
       description: project.summary,
-      images: [{ url: `${basePath}${project.cover}`, alt: project.alt }],
+      images: [{ url: `${basePath}/og-guo-yuqi.webp`, alt: "GUO YUQI ARCHITECTURE STUDENT PORTFOLIO" }],
     },
   };
 }
@@ -32,68 +33,86 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <main className="project-page">
-      <header className="project-header">
-        <a className="brand project-brand" href={`${basePath}/`} aria-label="返回林序个人主页">
-          <span className="brand-mark">LX</span>
-          <span className="brand-name">林序 · 建筑师<br />LIN XU · ARCHITECT</span>
+    <main className="student-detail-page">
+      <header className="student-detail-header">
+        <a className="student-brand" href={`${basePath}/`} aria-label="返回建筑学生作品集首页">
+          <strong>GYQ</strong>
+          <span>GUO YUQI<br />M.ARCH · 2026</span>
         </a>
-        <a className="back-link" href={`${basePath}/#projects`}>全部作品 <span>×</span></a>
+        <a className="student-back" href={`${basePath}/#projects`}>PROJECT INDEX <span>×</span></a>
       </header>
 
-      <section className="project-detail-hero">
-        <img src={`${basePath}${project.cover}`} alt={project.alt} />
-        <span className="project-hero-number">{project.number} / 06</span>
-      </section>
-
-      <section className="project-title-block section-pad">
-        <div>
-          <p className="eyebrow">{project.type} · {project.year}</p>
+      <section className="student-detail-hero">
+        <div className="detail-title">
+          <div><span>{project.number} / 06</span><time>{project.year}</time></div>
+          <p>{project.studio}</p>
           <h1>{project.title}</h1>
-          <p className="project-en-title">{project.titleEn}</p>
+          <h2>{project.titleEn}</h2>
         </div>
-        <p className="project-summary">{project.summary}</p>
+        <DrawingPlate variant={project.variant} index={`${project.year.slice(2)}-${project.number}`} caption={`${project.type} / Main drawing`} />
       </section>
 
-      <section className="project-specs">
+      <section className="student-detail-specs">
         <dl>
-          <div><dt>地点</dt><dd>{project.location}</dd></div>
-          <div><dt>年份</dt><dd>{project.year}</dd></div>
+          <div><dt>课程</dt><dd>{project.studio}</dd></div>
+          <div><dt>学习阶段</dt><dd>{project.school}</dd></div>
+          <div><dt>场地</dt><dd>{project.location}</dd></div>
+          <div><dt>周期</dt><dd>{project.duration}</dd></div>
           <div><dt>类型</dt><dd>{project.type}</dd></div>
-          <div><dt>面积</dt><dd>{project.area}</dd></div>
-          <div><dt>角色</dt><dd>{project.role}</dd></div>
-          <div><dt>状态</dt><dd>{project.status}</dd></div>
         </dl>
       </section>
 
-      <section className="project-story section-pad">
-        <p className="section-label"><span>01</span> 项目背景</p>
+      <section className="student-detail-intro section-pad">
+        <p className="student-section-label"><span>01</span> Design question</p>
         <div>
-          <h2>从场所中找到<br />设计的第一条线索。</h2>
-          <p>{project.description}</p>
+          <h2>设计从一个<br />具体问题开始。</h2>
+          <p>{project.question}</p>
         </div>
       </section>
 
-      <figure className="project-full-image">
-        <img src={`${basePath}${project.gallery[1]}`} alt={`${project.title}空间细节`} />
-        <figcaption>{project.title} · 空间与光线研究</figcaption>
-      </figure>
-
-      <section className="project-story project-story--concept section-pad">
-        <p className="section-label"><span>02</span> 设计策略</p>
-        <div>
-          <h2>材料、光线<br />与时间共同完成。</h2>
-          <p>{project.concept}</p>
+      <section className="drawing-spread section-pad" aria-label="项目图纸展示">
+        <div className="spread-heading">
+          <p className="student-section-label"><span>02</span> Drawing set</p>
+          <p>图纸系统 / DRAWINGS</p>
+        </div>
+        <div className="spread-grid">
+          {project.drawingSet.map((variant, index) => (
+            <DrawingPlate
+              key={`${variant}-${index}`}
+              variant={variant}
+              index={`${project.number}-${String(index + 1).padStart(2, "0")}`}
+              caption={`${variant.toUpperCase()} / ${project.titleEn}`}
+              className={index === 0 ? "spread-main" : ""}
+            />
+          ))}
         </div>
       </section>
 
-      <div className="project-gallery">
-        <figure><img src={`${basePath}${project.gallery[0]}`} alt={`${project.title}外部空间`} /></figure>
-        <figure><img src={`${basePath}${project.gallery[2]}`} alt={`${project.title}内部空间`} /></figure>
-      </div>
+      <section className="student-detail-strategy section-pad">
+        <p className="student-section-label"><span>03</span> Design strategy</p>
+        <div>
+          <h2>让分析、模型与图纸<br />指向同一条叙事。</h2>
+          <p>{project.strategy}</p>
+        </div>
+      </section>
 
-      <section className="next-project">
-        <p>下一个项目 · {nextProject.number}</p>
+      <section className="student-process section-pad">
+        <figure>
+          <img src={`${basePath}/projects/model-study.webp`} alt="白色建筑实体模型" />
+          <figcaption><span>Physical model / 1:200</span><span>Process record</span></figcaption>
+        </figure>
+        <div className="process-tools">
+          <p className="student-section-label"><span>04</span> Workflow</p>
+          <h2>过程与工具</h2>
+          <div>
+            <section><h3>本项目重点</h3><ul>{project.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul></section>
+            <section><h3>软件运用</h3><ul>{project.software.map((tool) => <li key={tool}>{tool}</li>)}</ul></section>
+          </div>
+        </div>
+      </section>
+
+      <section className="student-next-project">
+        <p>Next project · {nextProject.year}</p>
         <a href={`${basePath}/projects/${nextProject.slug}/`}>
           <span>{nextProject.title}</span>
           <small>{nextProject.titleEn}</small>

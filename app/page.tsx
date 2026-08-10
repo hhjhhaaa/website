@@ -1,58 +1,35 @@
+import { DrawingPlate } from "./components/DrawingPlate";
 import { projects, type Project } from "./projects/data";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (process.env.NODE_ENV === "production" ? "/website" : "");
-const experience = [
-  {
-    period: "2021—至今",
-    title: "独立建筑师",
-    place: "个人实践 · 上海",
-    detail: "主持住宅、文化空间与小型公共建筑项目，从概念设计持续参与至现场完成。",
-  },
-  {
-    period: "2018—2021",
-    title: "项目建筑师",
-    place: "Atelier Horizon · 上海",
-    detail: "负责公共文化与城市更新项目，协调设计团队、顾问与施工现场。",
-  },
-  {
-    period: "2016—2018",
-    title: "助理建筑师",
-    place: "STUDIO NORTH · 东京",
-    detail: "参与集合住宅与室内改造，专注模型研究、节点设计与材料样板。",
-  },
+
+const skillGroups = [
+  { index: "01", title: "绘图表达", en: "Drawing", detail: "总图 · 平面 · 剖面 · 轴测 · 节点" },
+  { index: "02", title: "数字建模", en: "Modeling", detail: "Rhino · SketchUp · AutoCAD" },
+  { index: "03", title: "视觉排版", en: "Layout", detail: "InDesign · Illustrator · Photoshop" },
+  { index: "04", title: "实体制作", en: "Making", detail: "纸板 · 木材 · 激光切割 · 模型摄影" },
 ];
 
-const education = [
-  ["2013—2016", "建筑学硕士", "同济大学 · 建筑与城市规划学院"],
-  ["2008—2013", "建筑学学士", "东南大学 · 建筑学院"],
-];
-
-const recognition = [
-  ["2025", "中国建筑新人奖 · 入围", "折院"],
-  ["2024", "ArchDaily Building of the Year · 提名", "光隙美术馆"],
-  ["2022", "上海城市空间艺术季 · 参展", "巷陌研究"],
-];
-
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const cardClasses = ["project-card--tall", "project-card--wide", "project-card--portrait", "project-card--landscape"];
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className={`project-card ${cardClasses[index % cardClasses.length]}`}>
-      <a className="project-link" href={`${basePath}/projects/${project.slug}/`} aria-label={`查看${project.title}项目`}>
-        <div className="project-image-wrap">
-          <img className="project-image" src={`${basePath}${project.cover}`} alt={project.alt} />
-          <span className="project-open" aria-hidden="true">↗</span>
+    <article className="student-project-card">
+      <a href={`${basePath}/projects/${project.slug}/`} aria-label={`查看${project.title}项目详情`}>
+        <div className="student-project-head">
+          <time>{project.year}</time>
+          <span>{project.number} / 06</span>
         </div>
-        <div className="project-meta">
+        <DrawingPlate
+          variant={project.variant}
+          index={`${project.year.slice(2)}-${project.number}`}
+          caption={`${project.type} / ${project.titleEn}`}
+        />
+        <div className="student-project-copy">
           <div>
-            <span className="project-number">{project.number}</span>
             <h3>{project.title}</h3>
             <p>{project.titleEn}</p>
           </div>
-          <div className="project-detail">
-            <span>{project.role}</span>
-            <span>{project.location}</span>
-            <span>{project.year}</span>
-          </div>
+          <p>{project.summary}</p>
+          <span className="project-arrow" aria-hidden="true">↗</span>
         </div>
       </a>
     </article>
@@ -61,150 +38,121 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export default function Home() {
   return (
-    <main>
+    <main className="student-site">
       <a className="skip-link" href="#content">跳至主要内容</a>
 
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="林序个人主页">
-          <span className="brand-mark">LX</span>
-          <span className="brand-name">林序 · 建筑师<br />LIN XU · ARCHITECT</span>
+      <header className="student-header">
+        <a className="student-brand" href="#top" aria-label="郭羽棋建筑学生作品集首页">
+          <strong>GYQ</strong>
+          <span>GUO YUQI<br />M.ARCH · 2026</span>
         </a>
-
-        <nav className="desktop-nav" aria-label="主要导航">
-          <a href="#about">简介</a>
-          <a href="#experience">经历</a>
+        <nav aria-label="主要导航">
+          <a href="#about">关于</a>
+          <a href="#skills">能力</a>
           <a href="#projects">作品</a>
           <a href="#contact">联系</a>
         </nav>
-
-        <details className="mobile-nav">
-          <summary aria-label="打开导航菜单"><span>菜单</span><span>＋</span></summary>
-          <nav aria-label="移动端导航">
-            <a href="#about">简介</a>
-            <a href="#experience">经历</a>
-            <a href="#projects">作品</a>
-            <a href="#contact">联系</a>
-          </nav>
-        </details>
       </header>
 
-      <section className="hero" id="top" aria-labelledby="hero-title">
-        <img className="hero-image" src={`${basePath}/projects/light-gallery.webp`} alt="暖阳进入极简混凝土室内空间" />
-        <div className="hero-shade" />
-        <div className="hero-copy">
-          <p className="eyebrow light">Independent Architect · Shanghai</p>
-          <h1 id="hero-title"><span className="hero-name-cn">林序</span><br />LIN XU</h1>
-          <div className="hero-bottom">
-            <p>建筑师 / 空间研究者<br />专注住宅、文化空间与城市更新。</p>
-            <a className="text-link light" href="#about">个人简介 <span>↓</span></a>
+      <section className="student-hero" id="top" aria-labelledby="hero-title">
+        <div className="hero-blueprint" aria-hidden="true" />
+        <div className="student-hero-copy">
+          <p className="micro-label"><span>Portfolio</span> 2019—2026</p>
+          <h1 id="hero-title">ARCHITECTURE<br /><em>STUDENT</em><br />PORTFOLIO</h1>
+          <div className="hero-intro">
+            <p>郭羽棋 / 应届建筑学硕士</p>
+            <p>以绘图、模型与排版记录<br />学生时代的空间实验。</p>
           </div>
         </div>
-        <div className="hero-index" aria-hidden="true">
-          <span>Curriculum Vitae</span>
-          <span>Updated · 08 / 2026</span>
+        <DrawingPlate variant="axon" index="G-06" caption="Graduation project / Urban Stitch" className="hero-drawing" />
+        <div className="hero-note" aria-hidden="true">
+          <span>Selected academic works</span>
+          <span>Singapore · Shenzhen</span>
         </div>
       </section>
 
-      <section className="manifesto section-pad" id="content">
+      <section className="student-about section-pad" id="content">
         <div id="about" className="anchor-target" />
-        <p className="section-label"><span>01</span> 个人简介</p>
-        <div className="manifesto-grid">
-          <h2>用空间回应场所，<br />也安放具体的生活。</h2>
-          <figure className="portrait-photo">
-            <img src={`${basePath}/projects/architect-at-work.webp`} alt="建筑师在工作台前绘制建筑草图" />
-            <figcaption>In studio · Shanghai, 2025</figcaption>
+        <p className="student-section-label"><span>01</span> About / 个人背景</p>
+        <div className="about-layout">
+          <div className="about-statement">
+            <h2>刚刚离开校园，<br />仍然保持提问。</h2>
+            <p>我是郭羽棋，2026 年毕业于新加坡国立大学建筑学硕士，建筑学本科就读于哈尔滨工业大学（深圳）。这个网站记录学生时代从空间分析、方案设计到图纸、模型与排版的学习过程，也希望为正在准备建筑作品集的同学提供可参考的表达路径。</p>
+          </div>
+          <figure className="student-portrait">
+            <img src={`${basePath}/projects/architect-at-work.webp`} alt="建筑学生在工作台前绘制建筑图纸" />
+            <figcaption><span>Studio diary</span><span>05 / 2026</span></figcaption>
           </figure>
-          <div className="manifesto-copy">
-            <p>我是林序，一名工作于上海的独立建筑师。过去十年，我在中国与日本参与住宅、文化空间和城市更新项目。我的工作从对现场的观察开始，在结构、光线和材料之间寻找克制而准确的答案。</p>
-            <a className="text-link" href="#experience">阅读完整履历 <span>↘</span></a>
+          <dl className="student-profile">
+            <div><dt>教育</dt><dd>NUS · M.Arch 2026</dd></div>
+            <div><dt>关注</dt><dd>建筑方案 / 空间分析 / 建筑表达</dd></div>
+            <div><dt>学习经历</dt><dd>新加坡 / 深圳</dd></div>
+            <div><dt>状态</dt><dd>开放建筑设计机会与作品集交流</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section className="student-skills" id="skills" aria-labelledby="skills-title">
+        <div className="skills-heading section-pad">
+          <p className="student-section-label"><span>02</span> Toolkit / 能力图谱</p>
+          <h2 id="skills-title">从想法到图纸，<br />再到一本完整作品集。</h2>
+          <p>我把设计过程理解为持续转换：观察变成概念，概念变成模型，模型变成图纸，最后由排版建立清晰叙事。</p>
+        </div>
+        <div className="skill-list">
+          {skillGroups.map((skill) => (
+            <article key={skill.index}>
+              <span>{skill.index}</span>
+              <div><h3>{skill.title}</h3><p>{skill.en}</p></div>
+              <p>{skill.detail}</p>
+              <i aria-hidden="true" />
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="student-projects section-pad" id="projects" aria-labelledby="projects-title">
+        <div className="projects-intro">
+          <p className="student-section-label"><span>03</span> Academic works / 学生作品</p>
+          <h2 id="projects-title">六年，六次<br />空间练习。</h2>
+          <p>项目按年份排列。点击任一项目，可查看设计问题、推演过程、图纸系统、模型表达与软件工作流；当前项目文字为版式演示，后续可替换为真实课程成果。</p>
+        </div>
+        <div className="student-project-grid">
+          {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
+        </div>
+      </section>
+
+      <section className="portfolio-process section-pad" aria-labelledby="process-title">
+        <p className="student-section-label"><span>04</span> Portfolio notes / 排版方法</p>
+        <div className="process-layout">
+          <div>
+            <h2 id="process-title">不只展示结果，<br />也展示如何抵达。</h2>
+            <p>每个项目页都把成果拆成“问题—策略—图纸—工具”四层。希望这种透明的组织方式能帮助更多建筑学生理解：作品集不是图片堆叠，而是设计思考的再次编辑。</p>
           </div>
-        </div>
-        <dl className="profile-facts">
-          <div><dt>现居</dt><dd>上海 · 中国</dd></div>
-          <div><dt>执业方向</dt><dd>建筑 / 室内 / 更新</dd></div>
-          <div><dt>工作语言</dt><dd>中文 / English / 日本語</dd></div>
-          <div><dt>开放合作</dt><dd>2026 秋季</dd></div>
-        </dl>
-      </section>
-
-      <section className="resume section-pad" id="experience" aria-labelledby="experience-title">
-        <div className="resume-heading">
-          <p className="section-label"><span>02</span> 个人经历</p>
-          <h2 id="experience-title">Experience<br />&amp; Education</h2>
-          <p>一份关于学习、实践与持续探索的简要记录。</p>
-        </div>
-
-        <div className="resume-content">
-          <section className="resume-group" aria-labelledby="work-title">
-            <h3 id="work-title"><span>A</span> 工作经历</h3>
-            <ol className="resume-rows">
-              {experience.map((item) => (
-                <li key={item.period}>
-                  <time>{item.period}</time>
-                  <div><strong>{item.title}</strong><span>{item.place}</span></div>
-                  <p>{item.detail}</p>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <div className="resume-columns">
-            <section className="resume-group" aria-labelledby="education-title">
-              <h3 id="education-title"><span>B</span> 教育背景</h3>
-              <ol className="compact-rows">
-                {education.map(([period, title, place]) => (
-                  <li key={period}><time>{period}</time><div><strong>{title}</strong><span>{place}</span></div></li>
-                ))}
-              </ol>
-            </section>
-            <section className="resume-group" aria-labelledby="recognition-title">
-              <h3 id="recognition-title"><span>C</span> 奖项与展览</h3>
-              <ol className="compact-rows">
-                {recognition.map(([year, title, project]) => (
-                  <li key={`${year}-${title}`}><time>{year}</time><div><strong>{title}</strong><span>{project}</span></div></li>
-                ))}
-              </ol>
-            </section>
-          </div>
-
-          <a className="cv-link" href="#contact">索取完整 CV <span>↗</span></a>
+          <DrawingPlate variant="layout" index="P-01" caption="Portfolio grid / A3 spread" />
         </div>
       </section>
 
-      <section className="projects section-pad" id="projects" aria-labelledby="projects-title">
-        <div className="section-heading">
-          <p className="section-label"><span>03</span> 代表作品</p>
-          <h2 id="projects-title">Selected Works</h2>
-          <p>六项代表性实践，记录我从<br />概念、深化到现场的角色。</p>
-        </div>
-        <div className="project-grid">
-          {projects.map((project, index) => <ProjectCard key={project.number} project={project} index={index} />)}
-        </div>
-      </section>
-
-      <section className="practice" id="practice" aria-labelledby="practice-title">
-        <div className="practice-intro section-pad">
-          <p className="section-label"><span>04</span> 设计关注</p>
-          <h2 id="practice-title">少一点姿态，<br />多一点感受。</h2>
-        </div>
-        <div className="principles">
-          <article><span>01</span><h3>阅读场所</h3><p>从气候、地形和人的路径开始，让方案长在它所在的地方。</p></article>
-          <article><span>02</span><h3>触摸材料</h3><p>尊重材料的触感与老化过程，也尊重每一道真实的建造痕迹。</p></article>
-          <article><span>03</span><h3>留给时间</h3><p>把使用、变化与自然生长纳入设计，让空间在生活中继续完成。</p></article>
+      <section className="student-journey section-pad" aria-labelledby="journey-title">
+        <p className="student-section-label"><span>05</span> Education / 学习经历</p>
+        <div className="journey-layout">
+          <h2 id="journey-title">Learning<br />in progress.</h2>
+          <ol>
+            <li><time>2024.08—2026.06</time><strong>建筑学硕士 M.Arch</strong><span>新加坡国立大学（NUS）</span><p>延续建筑方案设计、空间分析与建筑表达训练</p></li>
+            <li><time>2018.09—2023.06</time><strong>建筑学本科</strong><span>哈尔滨工业大学（深圳）</span><p>完成建筑设计、制图、建模与设计文本等系统学习</p></li>
+            <li><time>研究生申请</time><strong>建筑设计 / 建筑保护</strong><span>多所院校录取</span><p>NUS、HKU、米兰理工、AA、爱丁堡、曼大、悉尼大学、墨尔本大学</p></li>
+            <li><time>2019—2026</time><strong>学生作品集</strong><span>本科 / 硕士阶段</span><p>以图纸、模型、软件工作流和版式系统记录设计成长</p></li>
+          </ol>
         </div>
       </section>
 
-      <section className="contact" id="contact" aria-labelledby="contact-title">
-        <p className="section-label"><span>05</span> 联系我</p>
-        <h2 id="contact-title">聊聊空间，<br />也聊聊你的想法。</h2>
-        <a className="contact-mail" href="mailto:hello@linxu.archi">hello@linxu.archi <span>↗</span></a>
-        <footer>
-          <div><p>林序 · 独立建筑师</p><p>Shanghai · China</p></div>
-          <div className="footer-links">
-            <a href="#top">回到顶部 ↑</a>
-            <a href="https://unsplash.com" target="_blank" rel="noreferrer">影像 / Unsplash</a>
-          </div>
-          <p className="copyright">© 2026 LIN XU · ARCHITECT</p>
+      <section className="student-contact section-pad" id="contact" aria-labelledby="contact-title">
+        <p className="student-section-label"><span>06</span> Contact / 联系</p>
+        <h2 id="contact-title">一起聊设计，<br />也聊作品集。</h2>
+        <a href="mailto:guoyuqi0623@163.com">guoyuqi0623@163.com <span>↗</span></a>
+        <footer className="student-footer">
+          <p>GUO YUQI · M.ARCH 2026</p>
+          <p>PORTFOLIO 2019—2026</p>
+          <a href="#top">BACK TO TOP ↑</a>
         </footer>
       </section>
     </main>

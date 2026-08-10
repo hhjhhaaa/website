@@ -1,6 +1,6 @@
-# 林序 · LIN XU / ARCHITECT
+# 郭羽棋 · 建筑学生作品集
 
-一个个人建筑师单页作品集网站，采用克制的编辑式网格、黑白暖灰配色与响应式布局。
+一个面向应届建筑学毕业生的个人作品集展示网站。项目按 2019、2020、2023、2024、2025、2026 排列，重点展示总图、平面、剖面、轴测、实体模型、作品集排版和软件工作流。
 
 ## 本地运行
 
@@ -11,13 +11,16 @@ npm run dev
 
 ## 发布
 
-项目已配置 GitHub Pages。推送到 `main` 分支后，GitHub Actions 会自动构建并发布网站。首次使用时，请在仓库的 **Settings → Pages → Build and deployment** 中选择 **GitHub Actions**。
+项目已配置 GitHub Pages。推送到 `main` 分支后，GitHub Actions 会自动构建并发布。
 
-## 定制
+## 定制位置
 
-- 页面内容：`app/page.tsx`
-- 视觉样式：`app/globals.css`
-- 项目图片：`public/projects/`
-- 分享封面：`public/og-personal.webp`
+- 首页与个人背景：`app/page.tsx`
+- 项目资料：`app/projects/data.ts`
+- 项目详情模板：`app/projects/[slug]/page.tsx`
+- 线稿视觉系统：`app/components/DrawingPlate.tsx` 与 `app/globals.css`
+- 个人工作照：`public/projects/architect-at-work.webp`
+- 模型照片：`public/projects/model-study.webp`
+- 分享封面：`public/og-guo-yuqi.webp`
 
-姓名、项目名称、履历、地址和联系邮箱均为演示内容，正式使用前请替换。项目摄影来自 [Unsplash](https://unsplash.com)。
+姓名、教育背景、技能、录取院校和联系信息已按个人简历更新；六个项目的名称与内容仍为版式演示，正式使用前请替换为真实课程成果。照片素材来自 [Unsplash](https://unsplash.com)。
