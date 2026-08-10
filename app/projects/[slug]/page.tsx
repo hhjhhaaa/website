@@ -49,7 +49,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <h1>{project.title}</h1>
           <h2>{project.titleEn}</h2>
         </div>
-        <DrawingPlate variant={project.variant} index={`${project.year.slice(2)}-${project.number}`} caption={`${project.type} / Main drawing`} />
+        <div className="detail-visual-stack">
+          <figure className="detail-cover">
+            <img src={`${basePath}${project.cover}`} alt={project.coverAlt} />
+            <figcaption><span>Image reference</span><span>{project.year} / {project.number}</span></figcaption>
+          </figure>
+          <DrawingPlate variant={project.variant} index={`${project.year.slice(2)}-${project.number}`} caption={`${project.type} / Line study`} className="detail-drawing-inset" />
+        </div>
       </section>
 
       <section className="student-detail-specs">

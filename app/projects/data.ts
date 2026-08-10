@@ -11,6 +11,8 @@ export type Project = {
   type: string;
   location: string;
   duration: string;
+  cover: string;
+  coverAlt: string;
   variant: DrawingVariant;
   drawingSet: DrawingVariant[];
   summary: string;
@@ -32,6 +34,8 @@ export const projects: Project[] = [
     type: "公共建筑",
     location: "南京 · 老城南",
     duration: "8 周",
+    cover: "/projects/courtyard-house.webp",
+    coverAlt: "混凝土建筑立面与连续阳台的参考摄影",
     variant: "section",
     drawingSet: ["site", "plan", "section"],
     summary: "从一条 2.4 米宽的城市缝隙出发，以墙、楼梯和天光组织一座可穿行的社区图书馆。",
@@ -51,6 +55,8 @@ export const projects: Project[] = [
     type: "公共空间更新",
     location: "上海 · 苏州河",
     duration: "10 周",
+    cover: "/projects/stair-house.webp",
+    coverAlt: "楼梯扶手与光影关系的参考摄影",
     variant: "site",
     drawingSet: ["site", "axon", "layout"],
     summary: "通过城市观察、行为记录与可拆卸构件，把被忽略的桥下空间转化为弹性公共客厅。",
@@ -70,6 +76,8 @@ export const projects: Project[] = [
     type: "集合住宅",
     location: "重庆 · 南山",
     duration: "12 周",
+    cover: "/projects/light-gallery.webp",
+    coverAlt: "室内柱列、石材与斜射光的参考摄影",
     variant: "axon",
     drawingSet: ["site", "plan", "axon"],
     summary: "以坡度、视线与公共路径为参数，生成适应山地的可组合居住单元与共享平台。",
@@ -89,6 +97,8 @@ export const projects: Project[] = [
     type: "工业遗产更新",
     location: "无锡 · 运河沿岸",
     duration: "14 周",
+    cover: "/projects/garden-wall-house.webp",
+    coverAlt: "清水混凝土建筑与庭院植物的参考摄影",
     variant: "plan",
     drawingSet: ["plan", "section", "model"],
     summary: "保留旧厂房的结构节奏，以轻型木构植入学习、展览和社区制作空间。",
@@ -108,6 +118,8 @@ export const projects: Project[] = [
     type: "教育建筑",
     location: "宁波 · 象山港",
     duration: "16 周",
+    cover: "/projects/terrace-habitat.webp",
+    coverAlt: "层叠住宅建筑的黑白参考摄影",
     variant: "model",
     drawingSet: ["site", "section", "model"],
     summary: "把潮位、湿地与渔村生产纳入课程空间，构建一座随自然周期变化的滨海学校。",
@@ -127,6 +139,8 @@ export const projects: Project[] = [
     type: "城市设计与公共建筑",
     location: "上海 · 杨浦滨江",
     duration: "20 周",
+    cover: "/projects/river-archive.webp",
+    coverAlt: "木质楼梯与自然光的参考摄影",
     variant: "layout",
     drawingSet: ["site", "axon", "layout"],
     summary: "综合设计以六公里滨江断点为对象，通过小尺度建筑系统连接社区、工业遗存与公共岸线。",

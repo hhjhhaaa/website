@@ -18,11 +18,10 @@ function ProjectCard({ project }: { project: Project }) {
           <time>{project.year}</time>
           <span>{project.number} / 06</span>
         </div>
-        <DrawingPlate
-          variant={project.variant}
-          index={`${project.year.slice(2)}-${project.number}`}
-          caption={`${project.type} / ${project.titleEn}`}
-        />
+        <figure className="project-cover">
+          <img src={`${basePath}${project.cover}`} alt={project.coverAlt} />
+          <figcaption><span>Image reference</span><span>{project.year} / {project.number}</span></figcaption>
+        </figure>
         <div className="student-project-copy">
           <div>
             <h3>{project.title}</h3>
@@ -68,7 +67,11 @@ export default function Home() {
             <p>以绘图、模型与排版记录<br />学生时代的空间实验。</p>
           </div>
         </div>
-        <DrawingPlate variant="axon" index="G-06" caption="Graduation project / Urban Stitch" className="hero-drawing" />
+        <figure className="hero-project-visual">
+          <img src={`${basePath}/projects/river-archive.webp`} alt="木质楼梯与自然光的建筑参考摄影" />
+          <DrawingPlate variant="axon" index="G-06" caption="Line study / Urban Stitch" className="hero-drawing-inset" />
+          <figcaption><span>Image study / 06</span><span>Linework + photography</span></figcaption>
+        </figure>
         <div className="hero-note" aria-hidden="true">
           <span>Selected academic works</span>
           <span>Singapore · Shenzhen</span>

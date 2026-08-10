@@ -53,7 +53,11 @@ img { display: block; max-width: 100%; }
 .hero-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 600px; }
 .hero-intro p { margin: 0; font-size: .76rem; line-height: 1.7; }
 .hero-intro p:last-child { color: var(--muted); }
-.hero-drawing { position: relative; z-index: 3; align-self: center; justify-self: stretch; min-height: 540px; margin-left: 3vw; box-shadow: 22px 22px 0 var(--mint); }
+.hero-project-visual { position: relative; z-index: 3; align-self: center; min-height: 540px; height: min(62vh, 620px); margin: 0 0 0 3vw; border: 1px solid var(--line); background: var(--white); box-shadow: 22px 22px 0 var(--mint); }
+.hero-project-visual > img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.58) contrast(.92) brightness(1.04); }
+.hero-project-visual::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .2; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 48px 48px; }
+.hero-project-visual > figcaption { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 13px; background: rgba(247,250,247,.9); font-size: .52rem; letter-spacing: .08em; text-transform: uppercase; }
+.hero-drawing-inset { position: absolute; z-index: 4; left: -42px; bottom: 42px; width: 42%; min-height: 190px; box-shadow: 9px 9px 0 rgba(191,225,214,.88); }
 .hero-note { position: absolute; z-index: 4; right: clamp(20px, 5vw, 76px); bottom: 27px; display: flex; gap: 28px; font-size: .54rem; letter-spacing: .08em; text-transform: uppercase; }
 
 /* CSS architectural drawings */
@@ -162,8 +166,13 @@ img { display: block; max-width: 100%; }
 .student-project-card:nth-child(even) { margin-top: 130px; }
 .student-project-head { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: .58rem; letter-spacing: .08em; }
 .student-project-head time { color: var(--blue); font-size: 1rem; }
-.student-project-card .drawing-plate { min-height: 470px; transition: transform 300ms ease, box-shadow 300ms ease; }
-.student-project-card a:hover .drawing-plate { transform: translate(-5px,-5px); box-shadow: 10px 10px 0 var(--mint); }
+.project-cover { position: relative; min-height: 470px; margin: 0; overflow: hidden; border: 1px solid var(--line); background: var(--white); transition: transform 300ms ease, box-shadow 300ms ease; }
+.project-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .16; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 40px 40px; }
+.project-cover img { width: 100%; height: 470px; object-fit: cover; filter: saturate(.45) contrast(.94) brightness(1.04); transition: filter 300ms ease, transform 500ms ease; }
+.student-project-card:nth-child(3n) .project-cover img { object-position: center; }
+.project-cover figcaption { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 12px; background: rgba(247,250,247,.9); font-size: .51rem; letter-spacing: .08em; text-transform: uppercase; }
+.student-project-card a:hover .project-cover { transform: translate(-5px,-5px); box-shadow: 10px 10px 0 var(--mint); }
+.student-project-card a:hover .project-cover img { filter: saturate(.75) contrast(.96); transform: scale(1.015); }
 .student-project-copy { position: relative; display: grid; grid-template-columns: .7fr 1fr; gap: 35px; padding: 20px 55px 0 0; border-top: 1px solid var(--ink); }
 .student-project-copy h3 { margin: 0; font-size: 1.65rem; font-weight: 450; letter-spacing: -.04em; }
 .student-project-copy div p { margin: 5px 0 0; font-size: .56rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
@@ -206,7 +215,12 @@ img { display: block; max-width: 100%; }
 .detail-title > p { margin: 60px 0 14px; font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; }
 .detail-title h1 { margin: 0; font-size: clamp(2.8rem, 4.6vw, 5.2rem); font-weight: 450; line-height: .95; letter-spacing: -.055em; }
 .detail-title h2 { margin: 18px 0 0; font-size: .72rem; font-weight: 400; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
-.student-detail-hero .drawing-plate { min-height: 590px; box-shadow: 18px 18px 0 var(--mint); }
+.detail-visual-stack { position: relative; min-height: 590px; padding-bottom: 30px; }
+.detail-cover { position: relative; height: 560px; margin: 0; overflow: hidden; border: 1px solid var(--line); background: var(--white); box-shadow: 18px 18px 0 var(--mint); }
+.detail-cover > img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.55) contrast(.94) brightness(1.03); }
+.detail-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .14; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 44px 44px; }
+.detail-cover figcaption { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 12px; background: rgba(247,250,247,.9); font-size: .51rem; letter-spacing: .08em; text-transform: uppercase; }
+.detail-drawing-inset { position: absolute; z-index: 3; left: -55px; bottom: 0; width: 38%; min-height: 220px; box-shadow: 9px 9px 0 rgba(191,225,214,.9); }
 .student-detail-specs { padding: 0 clamp(20px, 5vw, 76px); }
 .student-detail-specs dl { margin: 0; display: grid; grid-template-columns: repeat(5,1fr); border-bottom: 1px solid var(--line); }
 .student-detail-specs div { padding: 24px 18px 25px 0; border-right: 1px solid var(--line); }
@@ -243,7 +257,7 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 1050px) {
   .student-hero { grid-template-columns: .95fr 1.05fr; }
-  .hero-drawing { min-height: 500px; margin-left: 0; }
+  .hero-project-visual { min-height: 500px; margin-left: 0; }
   .about-layout { grid-template-columns: 1fr .46fr; }
   .about-statement { grid-column: 1 / 3; }
   .about-statement > p { max-width: 560px; margin-left: 45%; }
@@ -261,7 +275,8 @@ img { display: block; max-width: 100%; }
   .student-hero { min-height: 940px; height: auto; grid-template-columns: 1fr; padding-top: 115px; }
   .student-hero-copy { min-height: 410px; }
   .student-hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-  .hero-drawing { min-height: 470px; box-shadow: 12px 12px 0 var(--mint); }
+  .hero-project-visual { height: 470px; min-height: 470px; margin-top: 25px; box-shadow: 12px 12px 0 var(--mint); }
+  .hero-drawing-inset { left: auto; right: 16px; bottom: 44px; width: 46%; min-height: 170px; }
   .hero-note { display: none; }
   .about-layout { grid-template-columns: 1fr; }
   .about-statement { grid-column: 1; }
@@ -274,14 +289,17 @@ img { display: block; max-width: 100%; }
   .skill-list i { display: none; }
   .student-project-grid { grid-template-columns: 1fr; }
   .student-project-card:nth-child(even) { margin-top: 0; }
-  .student-project-card .drawing-plate { min-height: 430px; }
+  .project-cover { min-height: 430px; }
+  .project-cover img { height: 430px; }
   .process-layout, .journey-layout { grid-template-columns: 1fr; }
   .process-layout > div > p { margin-left: 15vw; }
   .journey-layout ol { margin-top: 30px; }
   .student-footer { grid-template-columns: 1fr 1fr; }
   .student-footer a { grid-column: 2; grid-row: 1 / 3; }
   .student-detail-hero { min-height: 980px; grid-template-columns: 1fr; }
-  .student-detail-hero .drawing-plate { min-height: 500px; box-shadow: 12px 12px 0 var(--mint); }
+  .detail-visual-stack { min-height: 530px; }
+  .detail-cover { height: 500px; box-shadow: 12px 12px 0 var(--mint); }
+  .detail-drawing-inset { left: auto; right: 14px; bottom: 0; width: 42%; min-height: 180px; }
   .student-detail-specs dl { grid-template-columns: 1fr 1fr; }
   .student-detail-specs div { border-bottom: 1px solid var(--line); }
   .student-detail-specs div:nth-child(2n) { border-right: 0; }
@@ -300,16 +318,20 @@ img { display: block; max-width: 100%; }
   .student-hero-copy { min-height: 380px; }
   .student-hero h1 { font-size: 2.35rem; }
   .hero-intro { grid-template-columns: 1fr; gap: 10px; }
-  .hero-drawing { min-height: 350px; }
+  .hero-project-visual { height: 350px; min-height: 350px; }
+  .hero-drawing-inset { width: 48%; min-height: 135px; }
   .about-statement h2, .skills-heading h2, .projects-intro h2, .process-layout h2, .journey-layout h2, .student-detail-intro h2, .student-detail-strategy h2 { font-size: 2.75rem; }
-  .student-project-card .drawing-plate { min-height: 340px; }
+  .project-cover { min-height: 340px; }
+  .project-cover img { height: 340px; }
   .student-project-copy { grid-template-columns: 1fr; gap: 17px; }
   .student-portrait, .student-process figure { width: 86%; }
   .journey-layout li { grid-template-columns: 80px 1fr; }
   .journey-layout li > span, .journey-layout li p { grid-column: 2; }
   .student-detail-header .student-brand span { display: block; }
   .student-detail-hero { min-height: 820px; }
-  .student-detail-hero .drawing-plate { min-height: 360px; }
+  .detail-visual-stack { min-height: 395px; }
+  .detail-cover { height: 360px; }
+  .detail-drawing-inset { width: 50%; min-height: 135px; }
   .student-detail-specs dl { grid-template-columns: 1fr; }
   .student-detail-specs div { border-right: 0; }
   .student-next-project a > span { font-size: 3.5rem; }
