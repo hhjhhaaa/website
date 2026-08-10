@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section className="student-detail-intro section-pad">
         <p className="student-section-label"><span>01</span> Design question</p>
         <div>
-          <h2>设计从一个<br />具体问题开始。</h2>
+          <h2>设计问题</h2>
           <p>{project.question}</p>
         </div>
       </section>
@@ -91,7 +91,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section className="student-detail-strategy section-pad">
         <p className="student-section-label"><span>03</span> Design strategy</p>
         <div>
-          <h2>让分析、模型与图纸<br />指向同一条叙事。</h2>
+          <h2>设计策略与表达</h2>
           <p>{project.strategy}</p>
         </div>
       </section>
