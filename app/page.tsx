@@ -39,6 +39,11 @@ export default function Home() {
   return (
     <main className="student-site">
       <a className="skip-link" href="#content">跳至主要内容</a>
+      <div className="portfolio-rail" aria-hidden="true">
+        <span>GYQ / M.ARCH</span>
+        <i />
+        <b>2019—2026</b>
+      </div>
 
       <header className="student-header">
         <a className="student-brand" href="#top" aria-label="郭羽棋建筑学生作品集首页">
@@ -77,7 +82,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="student-about section-pad" id="content">
+      <section className="student-about section-pad" id="content" data-sheet="A—01">
         <div id="about" className="anchor-target" />
         <p className="student-section-label"><span>01</span> About / 个人背景</p>
         <div className="about-layout">
@@ -98,7 +103,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="student-skills" id="skills" aria-labelledby="skills-title">
+      <section className="student-skills" id="skills" aria-labelledby="skills-title" data-sheet="T—02">
         <div className="skills-heading section-pad">
           <p className="student-section-label"><span>02</span> Toolkit / 能力图谱</p>
           <h2 id="skills-title">建筑表达与<br />软件能力</h2>
@@ -116,7 +121,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="student-projects section-pad" id="projects" aria-labelledby="projects-title">
+      <section className="student-projects section-pad" id="projects" aria-labelledby="projects-title" data-sheet="P—03">
         <div className="projects-intro">
           <p className="student-section-label"><span>03</span> Academic works / 学生作品</p>
           <h2 id="projects-title">2019—2026<br />学生作品</h2>
@@ -127,7 +132,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="portfolio-process section-pad" aria-labelledby="process-title">
+      <section className="portfolio-process section-pad" aria-labelledby="process-title" data-sheet="L—04">
         <p className="student-section-label"><span>04</span> Portfolio notes / 排版方法</p>
         <div className="process-layout">
           <div>
@@ -138,7 +143,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="student-journey section-pad" aria-labelledby="journey-title">
+      <section className="student-journey section-pad" aria-labelledby="journey-title" data-sheet="E—05">
         <p className="student-section-label"><span>05</span> Education / 学习经历</p>
         <div className="journey-layout">
           <h2 id="journey-title">Education<br />2018—2026</h2>
@@ -151,7 +156,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="student-contact section-pad" id="contact" aria-labelledby="contact-title">
+      <section className="student-contact section-pad" id="contact" aria-labelledby="contact-title" data-sheet="C—06">
         <p className="student-section-label"><span>06</span> Contact / 联系</p>
         <h2 id="contact-title">联系郭羽棋</h2>
         <a href="mailto:guoyuqi0623@163.com">guoyuqi0623@163.com <span>↗</span></a>

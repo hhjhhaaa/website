@@ -15,7 +15,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--paper); }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Helvetica Neue", "Noto Sans SC", "PingFang SC", Arial, sans-serif; text-rendering: optimizeLegibility; }
+body { margin: 0; background-color: var(--paper); background-image: radial-gradient(circle at 18% 12%, rgba(105,185,202,.055) 0 1px, transparent 1.5px), radial-gradient(circle at 82% 74%, rgba(23,50,58,.035) 0 1px, transparent 1.5px); background-size: 19px 19px, 27px 27px; color: var(--ink); font-family: "Helvetica Neue", "Noto Sans SC", "PingFang SC", Arial, sans-serif; text-rendering: optimizeLegibility; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 
@@ -23,6 +23,14 @@ img { display: block; max-width: 100%; }
 .skip-link:focus { transform: translateY(0); }
 .section-pad { padding: clamp(84px, 10vw, 150px) clamp(20px, 5vw, 76px); }
 .anchor-target { position: relative; top: -40px; }
+.student-site { position: relative; }
+.portfolio-rail { position: fixed; z-index: 30; top: 50%; right: 9px; height: 270px; display: flex; flex-direction: column; align-items: center; gap: 13px; transform: translateY(-50%); color: var(--muted); font-size: .46rem; letter-spacing: .13em; text-transform: uppercase; writing-mode: vertical-rl; mix-blend-mode: multiply; }
+.portfolio-rail i { width: 1px; flex: 1; background: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px 7px); }
+.portfolio-rail b { color: var(--blue); font-weight: 500; }
+.student-about, .student-skills, .student-projects, .portfolio-process, .student-journey, .student-contact { position: relative; }
+.student-about[data-sheet]::before, .student-skills[data-sheet]::before, .student-projects[data-sheet]::before, .portfolio-process[data-sheet]::before, .student-journey[data-sheet]::before, .student-contact[data-sheet]::before { content: attr(data-sheet); position: absolute; z-index: 3; top: 24px; right: clamp(28px, 6vw, 92px); padding: 5px 8px; border: 1px solid currentColor; color: var(--blue); font-size: .48rem; letter-spacing: .14em; }
+.student-journey[data-sheet]::before { color: var(--mint); }
+.student-section-label span { min-width: 31px; padding: 4px 5px; border: 1px solid var(--blue); text-align: center; }
 
 .student-section-label, .micro-label { margin: 0; font-size: .64rem; letter-spacing: .15em; text-transform: uppercase; }
 .student-section-label { display: flex; align-items: center; gap: 14px; }
@@ -32,6 +40,7 @@ img { display: block; max-width: 100%; }
 /* Header */
 .student-header, .student-detail-header { height: 96px; padding: 20px clamp(20px, 3.2vw, 48px); display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); background: rgba(247,250,247,.92); }
 .student-header { position: absolute; z-index: 20; inset: 0 0 auto; background: transparent; }
+.student-header::after, .student-detail-header::after { content: ""; position: absolute; left: clamp(20px, 3.2vw, 48px); bottom: -1px; width: 84px; height: 3px; background: linear-gradient(90deg, var(--blue) 0 66%, var(--apricot) 66%); }
 .student-brand { display: flex; gap: 12px; align-items: flex-start; }
 .student-brand strong { font-size: 1.7rem; line-height: .88; letter-spacing: -.1em; }
 .student-brand span { font-size: .57rem; line-height: 1.35; letter-spacing: .08em; }
@@ -53,7 +62,7 @@ img { display: block; max-width: 100%; }
 .hero-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 600px; }
 .hero-intro p { margin: 0; font-size: .76rem; line-height: 1.7; }
 .hero-intro p:last-child { color: var(--muted); }
-.hero-project-visual { position: relative; z-index: 3; align-self: center; min-height: 540px; height: min(62vh, 620px); margin: 0 0 0 3vw; border: 1px solid var(--line); background: var(--white); box-shadow: 22px 22px 0 var(--mint); }
+.hero-project-visual { position: relative; z-index: 3; align-self: center; min-height: 540px; height: min(62vh, 620px); margin: 0 0 0 3vw; border: 1px solid var(--line); outline: 1px solid rgba(105,185,202,.3); outline-offset: 8px; background: var(--white); box-shadow: 22px 22px 0 var(--mint); }
 .hero-project-visual > img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.58) contrast(.92) brightness(1.04); }
 .hero-project-visual::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .2; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 48px 48px; }
 .hero-project-visual > figcaption { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 13px; background: rgba(247,250,247,.9); font-size: .52rem; letter-spacing: .08em; text-transform: uppercase; }
@@ -150,6 +159,10 @@ img { display: block; max-width: 100%; }
 .skills-heading > p:last-child { margin: 0; font-size: .78rem; line-height: 1.75; color: var(--muted); }
 .skill-list { border-top: 1px solid var(--line); }
 .skill-list article { min-height: 120px; padding: 25px clamp(20px, 5vw, 76px); display: grid; grid-template-columns: 55px .6fr 1fr 110px; align-items: center; gap: 30px; border-bottom: 1px solid var(--line); transition: background 200ms ease; }
+.skill-list article:nth-child(1) { box-shadow: inset 4px 0 var(--blue); }
+.skill-list article:nth-child(2) { box-shadow: inset 4px 0 var(--mint); }
+.skill-list article:nth-child(3) { box-shadow: inset 4px 0 var(--apricot); }
+.skill-list article:nth-child(4) { box-shadow: inset 4px 0 var(--ink); }
 .skill-list article:hover { background: var(--white); }
 .skill-list article > span { font-size: .58rem; color: var(--blue); }
 .skill-list h3 { margin: 0; font-size: 1.4rem; font-weight: 450; }
@@ -166,12 +179,15 @@ img { display: block; max-width: 100%; }
 .student-project-head { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: .58rem; letter-spacing: .08em; }
 .student-project-head time { color: var(--blue); font-size: 1rem; }
 .project-cover { position: relative; min-height: 470px; margin: 0; overflow: hidden; border: 1px solid var(--line); background: var(--white); transition: transform 300ms ease, box-shadow 300ms ease; }
+.project-cover::before { content: ""; position: absolute; z-index: 3; inset: 12px; pointer-events: none; background: linear-gradient(var(--blue),var(--blue)) left top / 24px 1px no-repeat, linear-gradient(var(--blue),var(--blue)) left top / 1px 24px no-repeat, linear-gradient(var(--blue),var(--blue)) right bottom / 24px 1px no-repeat, linear-gradient(var(--blue),var(--blue)) right bottom / 1px 24px no-repeat; opacity: .9; }
 .project-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .16; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 40px 40px; }
 .project-cover img { width: 100%; height: 470px; object-fit: cover; filter: saturate(.45) contrast(.94) brightness(1.04); transition: filter 300ms ease, transform 500ms ease; }
 .student-project-card:nth-child(3n) .project-cover img { object-position: center; }
 .project-cover figcaption { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 12px; background: rgba(247,250,247,.9); font-size: .51rem; letter-spacing: .08em; text-transform: uppercase; }
 .student-project-card a:hover .project-cover { transform: translate(-5px,-5px); box-shadow: 10px 10px 0 var(--mint); }
 .student-project-card a:hover .project-cover img { filter: saturate(.75) contrast(.96); transform: scale(1.015); }
+.student-project-card:nth-child(3n + 2) .project-cover { box-shadow: -9px 9px 0 rgba(105,185,202,.13); }
+.student-project-card:nth-child(3n) .project-cover { box-shadow: 9px 9px 0 rgba(243,195,158,.18); }
 .student-project-copy { position: relative; display: grid; grid-template-columns: .7fr 1fr; gap: 35px; padding: 20px 55px 0 0; border-top: 1px solid var(--ink); }
 .student-project-copy h3 { margin: 0; font-size: 1.65rem; font-weight: 450; letter-spacing: -.04em; }
 .student-project-copy div p { margin: 5px 0 0; font-size: .56rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
@@ -187,15 +203,17 @@ img { display: block; max-width: 100%; }
 .student-journey .student-section-label::after { background: rgba(255,255,255,.25); }
 .journey-layout { margin-top: 70px; display: grid; grid-template-columns: .65fr 1.35fr; gap: clamp(60px, 10vw, 160px); }
 .journey-layout h2 { color: var(--mint); }
-.journey-layout ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(255,255,255,.3); }
-.journey-layout li { display: grid; grid-template-columns: 100px .65fr .9fr; gap: 25px; padding: 25px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+.journey-layout ol { position: relative; margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(255,255,255,.3); }
+.journey-layout ol::before { content: ""; position: absolute; top: 0; bottom: 0; left: 99px; width: 1px; background: rgba(191,225,214,.22); }
+.journey-layout li { position: relative; display: grid; grid-template-columns: 100px .65fr .9fr; gap: 25px; padding: 25px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+.journey-layout li::before { content: ""; position: absolute; left: 95px; width: 9px; height: 9px; margin-top: 2px; border: 1px solid var(--mint); border-radius: 50%; background: var(--ink); }
 .journey-layout time { font-size: .62rem; color: var(--blue); }
 .journey-layout strong { font-size: .82rem; font-weight: 400; }
 .journey-layout li > span { font-size: .72rem; color: rgba(255,255,255,.65); }
 .journey-layout li p { grid-column: 2 / 4; margin: 0; font-size: .66rem; color: rgba(255,255,255,.45); }
 
 /* Contact */
-.student-contact { background: var(--apricot); }
+.student-contact { overflow: hidden; background-color: var(--apricot); background-image: linear-gradient(135deg, transparent 0 69%, rgba(255,255,255,.2) 69% 70%, transparent 70%), repeating-linear-gradient(90deg, transparent 0 63px, rgba(23,50,58,.04) 63px 64px); }
 .student-contact h2 { margin-top: 70px; }
 .student-contact > a { margin: 65px 0 140px; display: flex; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--ink); font-size: clamp(1.2rem, 2.2vw, 2.3rem); }
 .student-contact > a span { transition: transform 220ms ease; }
@@ -218,6 +236,7 @@ img { display: block; max-width: 100%; }
 .detail-cover { position: relative; height: 560px; margin: 0; overflow: hidden; border: 1px solid var(--line); background: var(--white); box-shadow: 18px 18px 0 var(--mint); }
 .detail-cover > img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.55) contrast(.94) brightness(1.03); }
 .detail-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .14; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 44px 44px; }
+.detail-cover::before { content: ""; position: absolute; z-index: 2; inset: 13px; pointer-events: none; background: linear-gradient(var(--blue),var(--blue)) left top / 28px 1px no-repeat, linear-gradient(var(--blue),var(--blue)) left top / 1px 28px no-repeat, linear-gradient(var(--blue),var(--blue)) right bottom / 28px 1px no-repeat, linear-gradient(var(--blue),var(--blue)) right bottom / 1px 28px no-repeat; }
 .detail-cover figcaption { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 10px 12px; background: rgba(247,250,247,.9); font-size: .51rem; letter-spacing: .08em; text-transform: uppercase; }
 .detail-drawing-inset { position: absolute; z-index: 3; left: -55px; bottom: 0; width: 38%; min-height: 220px; box-shadow: 9px 9px 0 rgba(191,225,214,.9); }
 .student-detail-specs { padding: 0 clamp(20px, 5vw, 76px); }
@@ -268,6 +287,7 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 780px) {
+  .portfolio-rail { display: none; }
   .student-header { height: 80px; }
   .student-header nav { gap: 18px; }
   .student-header nav a { font-size: .6rem; }
@@ -292,6 +312,7 @@ img { display: block; max-width: 100%; }
   .process-layout, .journey-layout { grid-template-columns: 1fr; }
   .process-layout > div > p { margin-left: 15vw; }
   .journey-layout ol { margin-top: 30px; }
+  .journey-layout ol::before, .journey-layout li::before { display: none; }
   .student-footer { grid-template-columns: 1fr 1fr; }
   .student-footer a { grid-column: 2; grid-row: 1 / 3; }
   .student-detail-hero { min-height: 980px; grid-template-columns: 1fr; }
@@ -310,6 +331,7 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 500px) {
+  .student-about[data-sheet]::before, .student-skills[data-sheet]::before, .student-projects[data-sheet]::before, .portfolio-process[data-sheet]::before, .student-journey[data-sheet]::before, .student-contact[data-sheet]::before { top: 16px; right: 20px; }
   .student-brand span { display: none; }
   .student-header nav { gap: 13px; }
   .student-hero { min-height: 820px; }
