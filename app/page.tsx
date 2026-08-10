@@ -69,7 +69,6 @@ export default function Home() {
         </div>
         <figure className="hero-project-visual">
           <img src={`${basePath}/projects/river-archive.webp`} alt="木质楼梯与自然光的建筑参考摄影" />
-          <DrawingPlate variant="axon" index="G-06" caption="Line study / Urban Stitch" className="hero-drawing-inset" />
           <figcaption><span>Image study / 06</span><span>Linework + photography</span></figcaption>
         </figure>
         <div className="hero-note" aria-hidden="true">
