@@ -18,6 +18,6 @@ npm run dev
 - 页面内容：`app/page.tsx`
 - 视觉样式：`app/globals.css`
 - 项目图片：`public/projects/`
-- 分享封面：`public/og-personal.png`
+- 分享封面：`public/og-personal.webp`
 
 姓名、项目名称、履历、地址和联系邮箱均为演示内容，正式使用前请替换。项目摄影来自 [Unsplash](https://unsplash.com)。
